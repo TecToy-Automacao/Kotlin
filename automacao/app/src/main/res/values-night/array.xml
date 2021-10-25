@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">　
+    <string-array name="align" tools:ignore="ExtraTranslation">
+        <item>@string/align_left</item>
+        <item>@string/align_mid</item>
+        <item>@string/align_right</item>
+    </string-array>
+</resources>
