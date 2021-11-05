@@ -997,9 +997,9 @@ public class TectoySunmiPrint {
         sunmiPrinterService.setPrinterStyle(WoyouConsts.ENABLE_BOLD, WoyouConsts.ENABLE);
         sunmiPrinterService.lineWrap(1, null);
         sunmiPrinterService.setAlignment(0, null);
-        sunmiPrinterService.printText("Mercadoria         Leite de soja\n", null);
-        sunmiPrinterService.printText("Data de validade         12-13  14时\n", null);
-        sunmiPrinterService.printBarCode("{C1234567890123456",  8, 90, 2, 2, null);
+        sunmiPrinterService.printText("Mercadoria         V2 Pro\n", null);
+        sunmiPrinterService.printText("Data de validade     05/11/2030\n", null);
+        sunmiPrinterService.printBarCode("{C1234567890123456",  8, 60, 2, 2, null);
         sunmiPrinterService.lineWrap(1, null);
     }
 

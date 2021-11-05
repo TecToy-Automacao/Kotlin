@@ -25,18 +25,19 @@
 
 
     <Button
+        android:id="@+id/btn_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@color/text"
         android:gravity="center"
         android:padding="10dp"
-        android:onClick="testOne"
         android:text="@string/label_print_one"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 
     <Button
+        android:id="@+id/btn_multi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

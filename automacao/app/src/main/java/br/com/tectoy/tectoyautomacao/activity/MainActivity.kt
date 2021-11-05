@@ -76,6 +76,11 @@ open class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ScannerActivity::class.java)
             startActivity(intent)
         }
+        val btn_label = findViewById<Button>(R.id.wordlabel)
+        btn_label.setOnClickListener {
+            val intent = Intent(this, LabelActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     private fun avanco(){

@@ -240,6 +240,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"/>
+
+            <Button
+                android:id="@+id/wordlabel"
+                android:layout_width="188dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56px"
+                android:layout_marginBottom="56px"
+                android:drawableTop="@drawable/function_label"
+                android:drawablePadding="12px"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/function_label"
+                android:background="@color/background"
+                android:textColor="@color/white"
+                android:textSize="24px" />
         </LinearLayout>
     </ScrollView>
 
