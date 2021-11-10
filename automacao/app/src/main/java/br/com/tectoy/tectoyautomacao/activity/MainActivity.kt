@@ -6,11 +6,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapFactory.Options
 import android.graphics.Matrix
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.widget.Button
+import android.widget.Toast
 import br.com.example.tectoy.tectoyautomacao.R
 import br.com.tectoy.tectoyautomacao.Utils.TectoySunmiPrint
+import java.lang.StringBuilder
 
 
 open class MainActivity : AppCompatActivity() {
@@ -20,9 +24,14 @@ open class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val wordlcd = findViewById<Button>(R.id.wordlcd)
+        wordlcd.setOnClickListener {
+            val intent = Intent(this, LcdActivity::class.java)
+            startActivity(intent)
+        }
         val workText = findViewById<Button>(R.id.worktext)
         workText.setOnClickListener{
-            testeCompleto()
+                testeCompleto()
         }
         val wordthreeline = findViewById<Button>(R.id.wordthreeline)
         wordthreeline.setOnClickListener {
@@ -37,7 +46,7 @@ open class MainActivity : AppCompatActivity() {
             gaveta()
         }
         val wordcortar = findViewById<Button>(R.id.wordcorta)
-        workText.setOnClickListener{
+        wordcortar.setOnClickListener{
             cut()
         }
         val btn_qr = findViewById<Button>(R.id.wordqr)
@@ -103,14 +112,9 @@ open class MainActivity : AppCompatActivity() {
         TectoySunmiPrint.getInstance().cutpaper()
     }
     private fun testeCompleto() {
-
-
         TectoySunmiPrint.getInstance().initPrinter()
         TectoySunmiPrint.getInstance().setSize(24)
-
         // Alinhamento do texto
-
-
         // Alinhamento do texto
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER)
         TectoySunmiPrint.getInstance().printText("Alinhamento\n")
@@ -121,9 +125,7 @@ open class MainActivity : AppCompatActivity() {
         TectoySunmiPrint.getInstance().printText("TecToy Automação\n")
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_RIGTH)
         TectoySunmiPrint.getInstance().printText("TecToy Automação\n")
-
         // Formas de impressão
-
         // Formas de impressão
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER)
         TectoySunmiPrint.getInstance().printText("Formas de Impressão\n")
@@ -162,11 +164,7 @@ open class MainActivity : AppCompatActivity() {
         TectoySunmiPrint.getInstance().printTextWithSize("TecToy Automação\n", 50F)
         TectoySunmiPrint.getInstance().feedPaper()
         TectoySunmiPrint.getInstance().setSize(24)
-
-
         // Impressão de BarCode
-
-
         // Impressão de BarCode
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER)
         TectoySunmiPrint.getInstance().printText("Imprime BarCode\n")
@@ -215,11 +213,7 @@ open class MainActivity : AppCompatActivity() {
         TectoySunmiPrint.getInstance()
             .printDoubleQRCode("www.tectoysunmi.com.br", "tectoysunmi", 7, 1)
         TectoySunmiPrint.getInstance().feedPaper()
-
-
         // Impresão Imagem
-
-
         // Impresão Imagem
         TectoySunmiPrint.getInstance().printText("Imprime Imagem\n")
         TectoySunmiPrint.getInstance().printText("-------------------------------\n")
@@ -244,54 +238,42 @@ open class MainActivity : AppCompatActivity() {
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_RIGTH)
         TectoySunmiPrint.getInstance().printBitmap(bitmap1)
         TectoySunmiPrint.getInstance().feedPaper()
-
-
         TectoySunmiPrint.getInstance().setAlign(TectoySunmiPrint.Alignment_CENTER)
         TectoySunmiPrint.getInstance().printText("Imprime Tabela\n")
         TectoySunmiPrint.getInstance().printText("--------------------------------\n")
-
         val prod = arrayOfNulls<String>(3)
         val width = IntArray(3)
         val align = IntArray(3)
-
         width[0] = 100
         width[1] = 50
         width[2] = 50
-
         align[0] = TectoySunmiPrint.Alignment_LEFT
         align[1] = TectoySunmiPrint.Alignment_CENTER
         align[2] = TectoySunmiPrint.Alignment_RIGTH
-
         prod[0] = "Produto 001"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         prod[0] = "Produto 002"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         prod[0] = "Produto 003"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         prod[0] = "Produto 004"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         prod[0] = "Produto 005"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         prod[0] = "Produto 006"
         prod[1] = "10 und"
         prod[2] = "3,98"
         TectoySunmiPrint.getInstance().printTable(prod, width, align)
-
         TectoySunmiPrint.getInstance().print3Line()
         TectoySunmiPrint.getInstance().openCashBox()
         TectoySunmiPrint.getInstance().cutpaper()

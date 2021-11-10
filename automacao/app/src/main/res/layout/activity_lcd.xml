@@ -12,34 +12,34 @@
     android:showDividers="middle|end|beginning">
 
     <TextView
+        android:id="@+id/btn_1linha"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/text"
         android:gravity="center"
-        android:onClick="text"
         android:text="@string/display_text"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 
 
     <TextView
+        android:id="@+id/btn_2linha"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="@color/text"
         android:gravity="center"
-        android:onClick="texts"
         android:text="@string/display_texts"
         android:textColor="@color/white"
         android:textSize="18sp"/>
 
     <TextView
+        android:id="@+id/btn_pic"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:background="@color/text"
         android:gravity="center"
-        android:onClick="pic"
         android:text="@string/display_pic"
         android:textColor="@color/white"
         android:textSize="18sp"/>

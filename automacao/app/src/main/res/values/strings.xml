@@ -19,6 +19,8 @@
     <string name="function_cortar">Cortar</string>
     <string name="function_scanner">Scanner</string>
     <string name="function_led">Led</string>
+    <string name="function_paygo">Paygo</string>
+    <string name="function_nfc">NFC</string>
 
     <!--titles-->
     <string name="setting_title">Configuração</string>
