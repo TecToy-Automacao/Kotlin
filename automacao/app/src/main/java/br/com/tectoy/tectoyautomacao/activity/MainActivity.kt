@@ -1,29 +1,45 @@
 package br.com.tectoy.tectoyautomacao.activity
 
 
+import android.content.ComponentName
 import android.content.Intent
+import android.content.ServiceConnection
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapFactory.Options
 import android.graphics.Matrix
 import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
+import android.os.RemoteException
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.Toast
 import br.com.example.tectoy.tectoyautomacao.R
+import br.com.tectoy.tectoyautomacao.Utils.KTectoySunmiPrinter
 import br.com.tectoy.tectoyautomacao.Utils.TectoySunmiPrint
+import br.com.tectoy.tectoyautomacao.activity.nfc.NfcExemplo
+import com.sunmi.extprinterservice.ExtPrinterService
+import java.lang.Exception
 import java.lang.StringBuilder
 
 
 open class MainActivity : AppCompatActivity() {
 
+    private var extPrinterService: ExtPrinterService? = null
+    var kPrinterPresenter: KTectoySunmiPrinter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        // Coneção Impressão K2
 
+        val wordnfc = findViewById<Button>(R.id.wordnfc)
+        wordnfc.setOnClickListener {
+            val intent = Intent(this, NfcExemplo::class.java)
+            startActivity(intent)
+        }
         val wordlcd = findViewById<Button>(R.id.wordlcd)
         wordlcd.setOnClickListener {
             val intent = Intent(this, LcdActivity::class.java)
@@ -31,7 +47,11 @@ open class MainActivity : AppCompatActivity() {
         }
         val workText = findViewById<Button>(R.id.worktext)
         workText.setOnClickListener{
+            if (getDeviceName() == "SUNMI K2") {
+                KTesteCompleto()
+            }else {
                 testeCompleto()
+            }
         }
         val wordthreeline = findViewById<Button>(R.id.wordthreeline)
         wordthreeline.setOnClickListener {
@@ -95,21 +115,117 @@ open class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ScanActivity::class.java)
             startActivity(intent)
         }
+        val btn_msitef = findViewById<Button>(R.id.wordmsitef)
+        btn_msitef.setOnClickListener {
+            val intent = Intent(this, MsitefActivity::class.java)
+            startActivity(intent)
+        }
 
 
+
+    }
+    open fun connectKPrintService() {
+        val intent = Intent()
+        intent.setPackage("com.sunmi.extprinterservice")
+        intent.action = "com.sunmi.extprinterservice.PrinterService"
+        bindService(intent, connService, BIND_AUTO_CREATE)
+    }
+
+    val connService: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+            extPrinterService = null
+        }
+
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            extPrinterService = ExtPrinterService.Stub.asInterface(service)
+          kPrinterPresenter = KTectoySunmiPrinter(this@MainActivity, extPrinterService)
+        }
     }
     private fun avanco(){
         TectoySunmiPrint.getInstance().initPrinter()
         TectoySunmiPrint.getInstance().print3Line()
     }
     private fun status(){
-        TectoySunmiPrint.getInstance().showPrinterStatus(this@MainActivity)
+        if (getDeviceName() == "SUNMI K2") {
+            try {
+                Toast.makeText(applicationContext,
+                    kPrinterPresenter?.traduzStatusImpressora(kPrinterPresenter!!.getStatus()),
+                    Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        } else {
+            TectoySunmiPrint.getInstance().showPrinterStatus(this@MainActivity)
+        }
     }
     private fun gaveta(){
         TectoySunmiPrint.getInstance().openCashBox()
     }
     private fun cut(){
-        TectoySunmiPrint.getInstance().cutpaper()
+        if (getDeviceName() == "SUNMI K2") {
+            try {
+
+                kPrinterPresenter?.printline(15)
+                kPrinterPresenter?.cut(KTectoySunmiPrinter.CUTTING_PAPER_FEED, 10)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }else {
+            TectoySunmiPrint.getInstance().cutpaper()
+        }
+    }
+    @Throws(RemoteException::class)
+    open fun KTesteCompleto() {
+
+        // Alinhamento
+        kPrinterPresenter?.bold(false)
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("Alinhamento\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+        kPrinterPresenter?.aling(0)
+        kPrinterPresenter?.text("TecToy Automação\n")
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("TecToy Automação\n")
+        kPrinterPresenter?.aling(2)
+        kPrinterPresenter?.text("TecToy Automação\n")
+        kPrinterPresenter?.printline(2)
+
+        // Formas de impressão
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("Formas de Impressão\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+        kPrinterPresenter?.aling(0)
+        kPrinterPresenter?.bold(true)
+        kPrinterPresenter?.text("TecToy Automação\n")
+
+
+        // Barcode
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("BarCode\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+
+        // QrCode
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("QrCode\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.qrCode("www.tectoyautomacao.com.br", 8, 0)
+        kPrinterPresenter?.aling(0)
+        kPrinterPresenter?.qrCode("www.tectoyautomacao.com.br", 8, 0)
+        kPrinterPresenter?.aling(2)
+        kPrinterPresenter?.qrCode("www.tectoyautomacao.com.br", 8, 0)
+
+        // Imagem
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("Imagem\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+
+        // Tabelas
+        kPrinterPresenter?.aling(1)
+        kPrinterPresenter?.text("Tabelas\n")
+        kPrinterPresenter?.text("--------------------------------\n")
+        kPrinterPresenter?.printline(10)
+        kPrinterPresenter?.cut(KTectoySunmiPrinter.HALF_CUTTING, 10)
     }
     private fun testeCompleto() {
         TectoySunmiPrint.getInstance().initPrinter()
@@ -291,7 +407,33 @@ open class MainActivity : AppCompatActivity() {
 
         return Bitmap.createBitmap(bitmap1, 0, 0, width, height, matrix, true)
     }
+    open fun getDeviceName(): String? {
+        val manufacturer = Build.MANUFACTURER
+        val model = Build.MODEL
+        return if (model.startsWith(manufacturer)) {
+            capitalize(model)
+        } else capitalize(manufacturer) + " " + model
+    }
 
+    open fun capitalize(str: String): String {
+        if (TextUtils.isEmpty(str)) {
+            return str
+        }
+        val arr = str.toCharArray()
+        var capitalizeNext = true
+        val phrase = StringBuilder()
+        for (c in arr) {
+            if (capitalizeNext && Character.isLetter(c)) {
+                phrase.append(Character.toUpperCase(c))
+                capitalizeNext = false
+                continue
+            } else if (Character.isWhitespace(c)) {
+                capitalizeNext = true
+            }
+            phrase.append(c)
+        }
+        return phrase.toString()
+    }
 
 }
 

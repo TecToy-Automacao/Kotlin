@@ -49,5 +49,6 @@ dependencies {
 
     // Obrigatorio para usar a class SunmiPrintHelper
     implementation 'com.sunmi:printerlibrary:1.0.13'
+    implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.sunmi:sunmiui:1.1.27'
 }
