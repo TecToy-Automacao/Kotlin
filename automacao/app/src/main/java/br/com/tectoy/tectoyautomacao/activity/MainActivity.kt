@@ -121,7 +121,9 @@ open class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        if (getDeviceName() == "SUNMI K2") {
+        connectKPrintService()
+        }
 
     }
     open fun connectKPrintService() {
