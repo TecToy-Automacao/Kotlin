@@ -134,6 +134,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.tectoy.tectoyautomacao.activity.MainActivity" />
         </activity>
+
+        <activity
+            android:name="br.com.tectoy.tectoyautomacao.activity.PaygoActivity"
+            android:parentActivityName="br.com.tectoy.tectoyautomacao.activity.MainActivity"
+            android:exported="true">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.tectoy.tectoyautomacao.activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

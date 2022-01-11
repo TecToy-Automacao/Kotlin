@@ -64,7 +64,7 @@ class MsitefActivity: AppCompatActivity() {
         var parcelas = "0";
         val intentSitef = Intent("br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF")
         intentSitef.putExtra("empresaSitef", "00000000")
-        intentSitef.putExtra("enderecoSitef", "172.17.102.96")
+        intentSitef.putExtra("enderecoSitef", "192.168.45.95")
         intentSitef.putExtra("operador", "0001")
         intentSitef.putExtra("data", "20200324")
         intentSitef.putExtra("hora", "130358")
@@ -100,7 +100,7 @@ class MsitefActivity: AppCompatActivity() {
     private fun execulteSTefCancelamento() {
         val intentSitef = Intent("br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF")
         intentSitef.putExtra("empresaSitef", "00000000")
-        intentSitef.putExtra("enderecoSitef", "172.17.102.96")
+        intentSitef.putExtra("enderecoSitef", "192.168.45.95")
         intentSitef.putExtra("operador", "0001")
         intentSitef.putExtra("data", currentDateTimeString)
         intentSitef.putExtra("hora", currentDateTimeStringT)
@@ -116,7 +116,7 @@ class MsitefActivity: AppCompatActivity() {
     private fun execulteSTefFuncoes() {
         val intentSitef = Intent("br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF")
         intentSitef.putExtra("empresaSitef", "00000000")
-        intentSitef.putExtra("enderecoSitef", "172.17.102.96")
+        intentSitef.putExtra("enderecoSitef", "192.168.45.95")
         intentSitef.putExtra("operador", "0001")
         intentSitef.putExtra("data", currentDateTimeString)
         intentSitef.putExtra("hora", currentDateTimeStringT)
@@ -133,7 +133,7 @@ class MsitefActivity: AppCompatActivity() {
     private fun execulteSTefReimpressao() {
         val intentSitef = Intent("br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF")
         intentSitef.putExtra("empresaSitef", "00000000")
-        intentSitef.putExtra("enderecoSitef", "172.17.102.96")
+        intentSitef.putExtra("enderecoSitef", "192.168.45.95")
         intentSitef.putExtra("operador", "0001")
         intentSitef.putExtra("data", "20200324")
         intentSitef.putExtra("hora", "130358")

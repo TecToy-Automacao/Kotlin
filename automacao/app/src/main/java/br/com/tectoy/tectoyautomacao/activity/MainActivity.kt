@@ -43,14 +43,31 @@ open class MainActivity : AppCompatActivity() {
         val wordlcd = findViewById<Button>(R.id.wordlcd)
         wordlcd.setOnClickListener {
             val intent = Intent(this, LcdActivity::class.java)
-            startActivity(intent)
+            if (getDeviceName().equals("SUNMI T2mini")) {
+                    startActivity(intent)
+            }else{
+                val context = applicationContext
+                val text: CharSequence = "Função Não Disponivel No Device"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()
+            }
         }
         val workText = findViewById<Button>(R.id.worktext)
         workText.setOnClickListener{
-            if (getDeviceName() == "SUNMI K2") {
-                KTesteCompleto()
+            if (getDeviceName() == "SUNMI L2" || getDeviceName() == "SUNMI L2K" || getDeviceName() == "SUNMI P2mini" || getDeviceName() == "SUNMI D2mini") {
+                val context = applicationContext
+                val text: CharSequence = "Função Não Disponivel No Device"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()
+                println("Passo Aqui")
             }else {
-                testeCompleto()
+                if (getDeviceName() == "SUNMI K2") {
+                    KTesteCompleto()
+                } else {
+                    testeCompleto()
+                }
             }
         }
         val wordthreeline = findViewById<Button>(R.id.wordthreeline)
@@ -67,7 +84,16 @@ open class MainActivity : AppCompatActivity() {
         }
         val wordcortar = findViewById<Button>(R.id.wordcorta)
         wordcortar.setOnClickListener{
-            cut()
+            if (getDeviceName() == "SUNMI L2" || getDeviceName() == "SUNMI L2K" || getDeviceName() == "SUNMI P2mini" || getDeviceName() == "SUNMI D2mini") {
+                val context = applicationContext
+                val text: CharSequence = "Função Não Disponivel No Device"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()
+                println("Passo Aqui")
+            }else {
+                cut()
+            }
         }
         val btn_qr = findViewById<Button>(R.id.wordqr)
         btn_qr.setOnClickListener{
@@ -102,8 +128,16 @@ open class MainActivity : AppCompatActivity() {
         }
         val btn_scanner = findViewById<Button>(R.id.wordscanner)
         btn_scanner.setOnClickListener {
-            val intent = Intent(this, ScannerActivity::class.java)
-            startActivity(intent)
+            if (getDeviceName() == "SUNMI L2" || getDeviceName() == "SUNMI L2K" || getDeviceName() == "SUNMI P2mini" || getDeviceName() == "SUNMI V2_PRO") {
+                val context = applicationContext
+                val text: CharSequence = "Função Não Disponivel No Device"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()
+            }else {
+                val intent = Intent(this, ScannerActivity::class.java)
+                startActivity(intent)
+            }
         }
         val btn_label = findViewById<Button>(R.id.wordlabel)
         btn_label.setOnClickListener {
@@ -112,15 +146,27 @@ open class MainActivity : AppCompatActivity() {
         }
         val btn_scan = findViewById<Button>(R.id.wordteste)
         btn_scan.setOnClickListener {
-            val intent = Intent(this, ScanActivity::class.java)
-            startActivity(intent)
+            if (getDeviceName() == "SUNMI L2" || getDeviceName() == "SUNMI L2K" || getDeviceName() == "SUNMI P2mini" || getDeviceName() == "SUNMI V2_PRO") {
+                val intent = Intent(this, ScanActivity::class.java)
+                startActivity(intent)
+            }else {
+                val context = applicationContext
+                val text: CharSequence = "Função Não Disponivel No Device"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()
+            }
         }
         val btn_msitef = findViewById<Button>(R.id.wordmsitef)
         btn_msitef.setOnClickListener {
             val intent = Intent(this, MsitefActivity::class.java)
             startActivity(intent)
         }
-
+        val btn_paygo = findViewById<Button>(R.id.wordpaygo)
+        btn_paygo.setOnClickListener {
+            val intent = Intent(this, PaygoActivity::class.java)
+            startActivity(intent)
+        }
         if (getDeviceName() == "SUNMI K2") {
         connectKPrintService()
         }
