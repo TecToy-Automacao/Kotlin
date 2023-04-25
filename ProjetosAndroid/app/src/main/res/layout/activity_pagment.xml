@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#100F0F"
+    tools:context=".ActivityPagment">
+
+
+    <ImageView
+        android:id="@+id/imgActivityPagment"
+        android:layout_width="618dp"
+        android:layout_height="618dp"
+        android:background="#12100F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imgActivityPagment1"
+        android:layout_width="544dp"
+        android:layout_height="249dp"
+        android:background="#A83535"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/vieatencao"
+        android:layout_width="536dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="264dp"
+        android:text="ATENÇÃO"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment1"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment1"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.265"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/viewatencao"
+        android:layout_width="534dp"
+        android:layout_height="129dp"
+        android:layout_marginEnd="264dp"
+        android:text="Selecione uma forma de pagamento. "
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment1"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imgActivityPagment2"
+        android:layout_width="236dp"
+        android:layout_height="618dp"
+        android:background="#A83535"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnMoney"
+        android:layout_width="187dp"
+        android:layout_height="149dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toTopOf="@+id/imgActivityPagment"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="183dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="408dp"
+        android:text="Dinheiro"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="188dp"
+        android:layout_height="121dp"
+        android:src="@drawable/money"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toTopOf="@+id/imgActivityPagment"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnCard"
+        android:layout_width="188dp"
+        android:layout_height="121dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toTopOf="@+id/imgActivityPagment"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="188dp"
+        android:layout_height="121dp"
+        android:src="@drawable/cart"
+        app:layout_constraintBottom_toTopOf="@+id/btnPix"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toBottomOf="@+id/btnMoney"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="183dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="404dp"
+        android:text="Cartão"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnPix"
+        android:layout_width="187dp"
+        android:layout_height="142dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toTopOf="@+id/imgActivityPagment"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintVertical_bias="0.831" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="188dp"
+        android:layout_height="121dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/pix"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="@+id/imgActivityPagment"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="183dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="408dp"
+        android:text="Pix"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:layout_width="326dp"
+        android:layout_height="343dp"
+        android:src="@drawable/carrinho"
+        app:layout_constraintBottom_toTopOf="@+id/btnfinsish"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imgActivityPagment"
+        app:layout_constraintVertical_bias="0.503"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnfinsish"
+        android:layout_width="365dp"
+        android:layout_height="122dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="RETURN"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgActivityPagment"
+        app:layout_constraintEnd_toEndOf="@+id/imgActivityPagment"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
