@@ -5,8 +5,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import br.com.itfast.tectoy.CorLed
-import br.com.itfast.tectoy.Dispositivo
-import br.com.itfast.tectoy.TecToy
 
 class ActivitityLedIndicacao : AppCompatActivity() {
 
@@ -16,7 +14,7 @@ class ActivitityLedIndicacao : AppCompatActivity() {
 
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lerd_indicacao)
+        setContentView(R.layout.activity_led_indicacao)
         val spinnerCorLiga = findViewById<Spinner>(R.id.spinnerCorLiga)
         val adapter: ArrayAdapter<*> =
             ArrayAdapter.createFromResource(this, R.array.coresLed, R.layout.spinner_item)
@@ -28,7 +26,7 @@ class ActivitityLedIndicacao : AppCompatActivity() {
         val txtValorTempoLoop = findViewById<EditText>(R.id.txtTempoLoop)
         btnSendLigarLedIndicacaoLoop.setOnClickListener { view: View? ->
             try {
-
+                tectoy.desligarLedStatus();
                 when (spinnerCorLigaLoop.selectedItem.toString()) {
                     "AZUL" -> tectoy.loopLigarStatus(
                         CorLed.AZUL,
@@ -40,6 +38,22 @@ class ActivitityLedIndicacao : AppCompatActivity() {
                     )
                     "VERMELHO" -> tectoy.loopLigarStatus(
                         CorLed.VERMELHO,
+                        Integer.valueOf(txtValorTempoLoop.text.toString())
+                    )
+                    "BRANCO" -> tectoy.loopLigarStatus(
+                        CorLed.BRANCO,
+                        Integer.valueOf(txtValorTempoLoop.text.toString())
+                    )
+                    "CIANO" -> tectoy.loopLigarStatus(
+                        CorLed.CIANO,
+                        Integer.valueOf(txtValorTempoLoop.text.toString())
+                    )
+                    "AMARELO" -> tectoy.loopLigarStatus(
+                        CorLed.AMARELO,
+                        Integer.valueOf(txtValorTempoLoop.text.toString())
+                    )
+                    "MAGENTA" -> tectoy.loopLigarStatus(
+                        CorLed.MAGENTA,
                         Integer.valueOf(txtValorTempoLoop.text.toString())
                     )
                 }
@@ -54,11 +68,16 @@ class ActivitityLedIndicacao : AppCompatActivity() {
         }
         btnSendLigarLedIndicacao.setOnClickListener { view: View? ->
             try {
+                tectoy.desligarLedStatus();
                 when (spinnerCorLiga.selectedItem.toString()) {
                     "AZUL" -> tectoy.ligarLedStatus(CorLed.AZUL)
                     "VERDE" -> tectoy.ligarLedStatus(CorLed.VERDE)
                     "VERMELHO" ->tectoy.ligarLedStatus(CorLed.VERMELHO)
-                }
+                    "BRANCO" ->tectoy.ligarLedStatus(CorLed.BRANCO)
+                    "CIANO" ->tectoy.ligarLedStatus(CorLed.CIANO)
+                    "AMARELO" ->tectoy.ligarLedStatus(CorLed.AMARELO)
+                    "MAGENTA" ->tectoy.ligarLedStatus(CorLed.MAGENTA)
+                   }
                 Toast.makeText(
                     applicationContext,
                     "Comando enviado com sucesso",

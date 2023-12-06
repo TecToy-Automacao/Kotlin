@@ -11,15 +11,13 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import br.com.daruma.framework.mobile.exception.DarumaException
 import br.com.itfast.tectoy.*
+
 
 lateinit var tectoy : TecToy
 
 @Suppress("KotlinConstantConditions")
 class MainActivity(): AppCompatActivity()  {
-
-
 
     private  lateinit var pendingIntent: PendingIntent
     var NFCIniciado = false
@@ -47,18 +45,33 @@ class MainActivity(): AppCompatActivity()  {
     lateinit var btnDesligarLedIndicacao : Button
     lateinit var btnLigarLedIndicacao : Button
     lateinit var btnIniciar :Button
+    var retornoNFC :String? =""
+    var retornoNFC2 :String? =""
 
-
-    var nfcCallback =
-        TecToyNfcCallback { s: String? ->
-            runOnUiThread {
-                Toast.makeText(
-                    applicationContext,
-                    s,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+    var nfcCallbackK2: TecToyNfcCallback = object : TecToyNfcCallback {
+        override fun retornarValor(strValor: String) {
+            retornoNFC = "Conteudo do NFC:$strValor"
+            runOnUiThread { txtDistancia.text = retornoNFC }
         }
+
+        override fun retornarId(s: String) {
+            //Retorno do ID não disponível para o K2
+        }
+    }
+
+    var nfcCallback: TecToyNfcCallback = object : TecToyNfcCallback {
+        override fun retornarValor(strValor: String) {
+            retornoNFC = "NFC Valor: $strValor"
+            txtDistancia.text= retornoNFC+ retornoNFC2;
+         }
+
+        override fun retornarId(strID: String) {
+            retornoNFC2 = " | NFC ID: $strID"
+            txtDistancia.text= retornoNFC+ retornoNFC2
+        }
+
+    }
+
     var balancaCallback =
         TectoyBalancaCallback { map: Map<*, *> ->
             Toast.makeText(
@@ -109,9 +122,7 @@ class MainActivity(): AppCompatActivity()  {
         pendingIntent = PendingIntent.getActivity(
             this,
             0,
-            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-            PendingIntent.FLAG_IMMUTABLE
-        )
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),0 )
 
         btnStatusImpressora = findViewById(R.id.btnStatusImpressora)
         btnImprimir = findViewById(R.id.btnImprimir)
@@ -415,17 +426,37 @@ class MainActivity(): AppCompatActivity()  {
             }
         }
         btnIniciarNFC.setOnClickListener { _: View? ->
-            try {
-                tectoy.iniciarNFC(intent, nfcCallback)
-                NFCIniciado = true
-                Toast.makeText(
-                    applicationContext,
-                    "Comando enviado com sucesso",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } catch (ex: java.lang.Exception) {
-                Toast.makeText(applicationContext, ex.message, Toast.LENGTH_SHORT).show()
+
+            val dispositivo = spinnerDispositivos.selectedItem.toString()
+
+            if (dispositivo == "K2") {
+                try {
+                    tectoy.iniciarNFC(intent, nfcCallbackK2)
+                    NFCIniciado = true
+                    Toast.makeText(
+                        applicationContext,
+                        "Comando enviado com sucesso",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (ex: java.lang.Exception) {
+                    Toast.makeText(applicationContext, ex.message, Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                try {
+                    tectoy.iniciarNFC(intent, nfcCallback)
+                    NFCIniciado = true
+                    Toast.makeText(
+                        applicationContext,
+                        "Comando enviado com sucesso",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (ex: java.lang.Exception) {
+                    Toast.makeText(applicationContext, ex.message, Toast.LENGTH_SHORT).show()
+                }
             }
+
+
+
         }
 
         btnLerPesoBalanca.setOnClickListener { _: View? ->

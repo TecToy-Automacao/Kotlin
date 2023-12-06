@@ -10,10 +10,11 @@
         android:id="@+id/edtTextoNFC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10px"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:layout_margin="10px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,8 +23,9 @@
         android:id="@+id/btnEnviarEscritaNFC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Escrever NFC"
         android:layout_margin="10px"
+        android:layout_marginTop="16dp"
+        android:text="Escrever NFC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTextoNFC" />
