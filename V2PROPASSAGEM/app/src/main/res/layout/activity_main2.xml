@@ -244,7 +244,7 @@
         android:layout_marginTop="14dp"
         android:background="@android:drawable/screen_background_dark_transparent"
         android:ems="10"
-        android:inputType="textPersonName|textCapWords"
+        android:inputType="textPersonName"
         android:paddingStart="5sp"
         android:shadowColor="@android:color/darker_gray"
         android:textColor="@color/white"
@@ -272,8 +272,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlCompat" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnVoltar"

@@ -6,14 +6,14 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import br.com.itfast.tectoy.Dispositivo
-import br.com.itfast.tectoy.TecToy
-import br.com.itfast.tectoy.TecToyScannerCallback
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 
+import br.com.itfast.tectoy.Dispositivo
+import br.com.itfast.tectoy.TecToy
+import br.com.itfast.tectoy.TecToyScannerCallback
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -25,8 +25,6 @@ class MainActivity2 : AppCompatActivity() {
     var NomeDigitado: String = ""
     var Lugar: String = ""
 
-    var reinicImp = "" + 0x1B.toChar() + 0x40.toChar() //Reinicia impressora
-    var cmdCanModoChines = "" + 0x1C.toChar() + 0x2E.toChar() //Desativa o modo chines
     var cfgCodePage = "" + 0x1B.toChar() + 0x52.toChar() + 0x0C.toChar()+"" + 0x1B.toChar() + 0x74.toChar() + 0x02.toChar()
     var centro = "" + 0x1B.toChar() + 0x61.toChar() + 0x31.toChar() //Ativa alinhamento centro
     var deslCentro = "" + 0x1B.toChar() + 0x61.toChar() + 0x30.toChar() //Desativa alinhamento centro
@@ -115,18 +113,17 @@ class MainActivity2 : AppCompatActivity() {
         btnLugar27 = findViewById(R.id.btnLugar27)
         btnConfirmar = findViewById(R.id.btnConfirmar)
         txtCodigoLido = findViewById(R.id.txtCodigoLido)
-      //  txtCodigoLido.movementMethod = ScrollingMovementMethod()
 
-        val Horarios = arrayListOf<String>("6:00","9:00","12:00","15:00","23:00")
-        val Origens = arrayListOf<String>("SP","SJC","COTIA")
-        val Destinos = arrayListOf<String>("SP","SJC","COTIA","MANAUS")
-        val Datas = arrayListOf<String>("01/08/2023","05/08/2023","10/08/2023","15/08/2023")
+        val Horarios = arrayListOf("6:00","9:00","12:00","15:00","23:00")
+        val Origens = arrayListOf("SP","SJC","COTIA")
+        val Destinos = arrayListOf("SP","SJC","COTIA","MANAUS")
+        val Datas = arrayListOf("01/05/2024","05/05/2024","10/05/2024","15/05/2024")
         val dateFormat: DateFormat
         val date: Date
         val  arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Horarios)
         spnHorario.adapter = arrayAdapter
         spnHorario.onItemSelectedListener = object :
-        AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+            AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(spnHorario.selectedItem == "6:00"){
                     Horario = "6:00"
@@ -146,7 +143,6 @@ class MainActivity2 : AppCompatActivity() {
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
-
         }
 
         val  arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, Origens)
@@ -193,7 +189,6 @@ class MainActivity2 : AppCompatActivity() {
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
-
         }
         val  arrayAdapter4 = ArrayAdapter(this, android.R.layout.simple_spinner_item, Datas)
         spnData.adapter = arrayAdapter4
@@ -201,16 +196,15 @@ class MainActivity2 : AppCompatActivity() {
             AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (spnData.selectedItem == "01/08/2023"){
-                    Data = "01/08/2023"
-                }else if (spnData.selectedItem == "05/08/2023"){
-                    Data = "05/08/2023"
-                }else if (spnData.selectedItem == "10/08/2023"){
-                    Data = "10/08/2023"
-                }else if (spnData.selectedItem == "15/08/2023"){
-                    Data = "15/08/2023"
+                if (spnData.selectedItem == "01/05/2024"){
+                    Data = "01/05/2024"
+                }else if (spnData.selectedItem == "05/05/2024"){
+                    Data = "05/05/2024"
+                }else if (spnData.selectedItem == "10/05/2024"){
+                    Data = "10/05/2024"
+                }else if (spnData.selectedItem == "15/05/2024"){
+                    Data = "15/05/2024"
                 }
-
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -218,24 +212,22 @@ class MainActivity2 : AppCompatActivity() {
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
-
         }
 
         tectoy = TecToy(Dispositivo.V2_PRO, this)
 
-       btnLerCodBarras.setOnClickListener {
-           tectoy.iniciarScanner(callbackCodBarras)
-           txtCodigoLido.text.clear()
-           txtCodigoLido.visibility = View.VISIBLE
-           btnVoltar.visibility = View.VISIBLE
-           btnLerCodBarras.visibility= View.INVISIBLE
-           spnOrigem.visibility = View.INVISIBLE
-           spnDestino.visibility = View.INVISIBLE
-           spnData.visibility = View.INVISIBLE
-           spnHorario.visibility = View.INVISIBLE
-           btnImprimir.visibility =  View.INVISIBLE
-
-       }
+        btnLerCodBarras.setOnClickListener {
+            tectoy.iniciarScanner(callbackCodBarras)
+            txtCodigoLido.text.clear()
+            txtCodigoLido.visibility = View.VISIBLE
+            btnVoltar.visibility = View.VISIBLE
+            btnLerCodBarras.visibility= View.INVISIBLE
+            spnOrigem.visibility = View.INVISIBLE
+            spnDestino.visibility = View.INVISIBLE
+            spnData.visibility = View.INVISIBLE
+            spnHorario.visibility = View.INVISIBLE
+            btnImprimir.visibility =  View.INVISIBLE
+        }
 
         btnVoltar.setOnClickListener {
             txtCodigoLido.visibility = View.INVISIBLE
@@ -252,114 +244,86 @@ class MainActivity2 : AppCompatActivity() {
             strTela = ""
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-       }
-
-        btnConfirmar.setOnClickListener {
-            Passagem = reinicImp+ cmdCanModoChines+ cfgCodePage+ "TecToy Automacao  V2Pro\nSaiba mais em: \nwww.tectoyautomacao.com.br\n"+
-            "--------------------------------\n       Demo Venda Passagem\n--------------------------------\n"
-            mostrarOnibus()
-
         }
 
-         btnLugar1.setOnClickListener {
-                Lugar = "1"
-                ocultarOnibus()
+        btnConfirmar.setOnClickListener {
+            Passagem = cfgCodePage+ "TecToy Automacao  V2Pro\nSaiba mais em: \nwww.tectoyautomacao.com.br\n"+
+                    "--------------------------------\n       Demo Venda Passagem\n--------------------------------\n"
+            mostrarOnibus()
+        }
 
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
+        btnLugar1.setOnClickListener {
+            Lugar = "1"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-          }
+        btnLugar3.setOnClickListener {
+            Lugar = "3"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-         btnLugar3.setOnClickListener {
+        btnLugar9.setOnClickListener {
+            Lugar = "9"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-                Lugar = "3"
-                ocultarOnibus()
+        btnLugar11.setOnClickListener {
+            Lugar = "11"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
+        btnLugar17.setOnClickListener {
+            Lugar = "17"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-         }
+        btnLugar19.setOnClickListener {
+            Lugar = "19"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-         btnLugar9.setOnClickListener {
+        btnLugar25.setOnClickListener {
+            Lugar = "25"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-                Lugar = "9"
-                ocultarOnibus()
+        btnLugar27.setOnClickListener {
+            Lugar = "27"
+            ocultarOnibus()
+            btnImprimir.visibility = View.VISIBLE
+            txtInsiraNome.visibility = View.VISIBLE
+            plntxtNomePassageiro.visibility = View.VISIBLE
+        }
 
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-         }
-
-         btnLugar11.setOnClickListener {
-
-                Lugar = "11"
-                ocultarOnibus()
-
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-
-         }
-
-         btnLugar17.setOnClickListener {
-
-                Lugar = "17"
-               ocultarOnibus()
-
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-
-         }
-
-         btnLugar19.setOnClickListener {
-
-                Lugar = "19"
-               ocultarOnibus()
-
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-
-         }
-
-         btnLugar25.setOnClickListener {
-
-                Lugar = "25"
-              ocultarOnibus()
-
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-         }
-
-         btnLugar27.setOnClickListener {
-
-                Lugar = "27"
-                ocultarOnibus()
-
-                btnImprimir.visibility = View.VISIBLE
-                txtInsiraNome.visibility = View.VISIBLE
-                plntxtNomePassageiro.visibility = View.VISIBLE
-
-
-                }
-
-         btnImprimir.setOnClickListener {
+        btnImprimir.setOnClickListener {
             val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
             val date = Date()
             if (plntxtNomePassageiro.text.toString().length != 0) {
                 NomeDigitado = plntxtNomePassageiro.text.toString()
                 txtInsiraNome.visibility = View.INVISIBLE
                 plntxtNomePassageiro.visibility = View.INVISIBLE
-                plntxtNomePassageiro.text.clear();
+                plntxtNomePassageiro.text.clear()
                 var dataHora: String = dateFormat.format(date)
 
                 strTela = Origem + "|" + Destino + "|" + Data + "|" + Horario + "|" +
@@ -393,10 +357,7 @@ class MainActivity2 : AppCompatActivity() {
                 btnConfirmar.visibility = View.INVISIBLE
                 btnLerCodBarras.visibility = View.INVISIBLE
             }
-
         }
-
-
     }
 
     fun mostrarBilhete(){
@@ -408,10 +369,6 @@ class MainActivity2 : AppCompatActivity() {
                 "--------------------------------\n"
         if (strTxtLido.isNotEmpty() or (strTxtLido.indexOf("\\|")!=-1)){
             val arr = Pattern.compile("\\|").split(strTxtLido)
-            // logs para conferencia em debug apenas
-            Log.i("TECTOY", strTxtLido)
-            Log.i("TECTOY", arr.contentToString())
-
             strMostraBilhete+=  "--------------------------------\n" +"Origem:" + arr[0].toString() + "  " + "Destino: " + arr[1].toString() +
                     "\nData: " + arr[2].toString()+ " |" + arr[3].toString() + "\n" +
                     "(Poltrona: " + arr[4].toString() + " Plataforma 1)\n" +
@@ -426,13 +383,8 @@ class MainActivity2 : AppCompatActivity() {
                     "--------------------------------\n" +
                     "Passageiro: " + "DOC 11222333x\n" + arr[5].toString() +
                     "\nData/ Hora Impressao: \n         " + arr[6].toString()
-
-            Log.i("TESTE",strTxtLido)
-            Log.i("TESTE",strMostraBilhete)
             if (strMostraBilhete.isNotEmpty()){txtCodigoLido.setText(strMostraBilhete)}
             else{ Toast.makeText(this, "Erro ao ler conteudo", Toast.LENGTH_SHORT).show()}
         }else{ Toast.makeText(this, "Código inválido, tente ler o QrCode de um Bilhete válido.", Toast.LENGTH_SHORT).show()}
-
-
     }
 }
