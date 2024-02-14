@@ -41,7 +41,7 @@ class MainActivity(): AppCompatActivity()  {
     lateinit var btnLerPesoBalanca : Button
     lateinit var btnEscreverNFC : Button
     lateinit var btnIniciarCameraProfundidade : Button
-    lateinit var txtDistancia : TextView
+    lateinit var txtAuxiliar : TextView
     lateinit var btnDesligarLedIndicacao : Button
     lateinit var btnLigarLedIndicacao : Button
     lateinit var btnIniciar :Button
@@ -51,7 +51,7 @@ class MainActivity(): AppCompatActivity()  {
     var nfcCallbackK2: TecToyNfcCallback = object : TecToyNfcCallback {
         override fun retornarValor(strValor: String) {
             retornoNFC = "Conteudo do NFC:$strValor"
-            runOnUiThread { txtDistancia.text = retornoNFC }
+            runOnUiThread { txtAuxiliar.text = retornoNFC }
         }
 
         override fun retornarId(s: String) {
@@ -62,12 +62,12 @@ class MainActivity(): AppCompatActivity()  {
     var nfcCallback: TecToyNfcCallback = object : TecToyNfcCallback {
         override fun retornarValor(strValor: String) {
             retornoNFC = "NFC Valor: $strValor"
-            txtDistancia.text= retornoNFC+ retornoNFC2;
+            txtAuxiliar.text= retornoNFC+ retornoNFC2;
          }
 
         override fun retornarId(strID: String) {
             retornoNFC2 = " | NFC ID: $strID"
-            txtDistancia.text= retornoNFC+ retornoNFC2
+            txtAuxiliar.text= retornoNFC+ retornoNFC2
         }
 
     }
@@ -91,7 +91,7 @@ class MainActivity(): AppCompatActivity()  {
     var profundidadeCallback =
         TecToyCameraProfundidadeCallback { i: Int ->
             runOnUiThread {
-                "$i cm".also { txtDistancia.text = it }
+                "$i cm".also { txtAuxiliar.text = it }
             }
         }
 
@@ -143,7 +143,7 @@ class MainActivity(): AppCompatActivity()  {
         btnLerPesoBalanca = findViewById(R.id.btnLerPesoBalanca)
         btnEscreverNFC = findViewById(R.id.btnEscreverNFC)
         btnIniciarCameraProfundidade = findViewById(R.id.btnIniciarCameraProfundidade)
-        txtDistancia = findViewById(R.id.txtDistancia)
+        txtAuxiliar = findViewById(R.id.txtAuxiliar)
         btnDesligarLedIndicacao = findViewById(R.id.btnDesligarLedIndicacao)
         btnLigarLedIndicacao = findViewById(R.id.btnLigarLedIndicacao)
         btnIniciar = findViewById<Button>(R.id.btnIniciar)
@@ -159,19 +159,19 @@ class MainActivity(): AppCompatActivity()  {
                 "T2_MINI" -> {
                     tectoy = TecToy(Dispositivo.T2_MINI, this@MainActivity)
                     goneButtons()
-                    btnStatusGaveta.visibility = View.VISIBLE
                     btnStatusImpressora.visibility = View.VISIBLE
+                    btnStatusGaveta.visibility = View.VISIBLE
                     btnImprimir.visibility = View.VISIBLE
-                    btnImprimirImagem.visibility = View.VISIBLE
                     btnAbrirGaveta.visibility = View.VISIBLE
+                    btnImprimirImagem.visibility = View.VISIBLE
+                    btnImprimirQrCode.visibility = View.VISIBLE
                     btnAcionarGuilhotina.visibility = View.VISIBLE
+                    btnIniciarNFC.visibility = View.VISIBLE
+                    btnEscreverNFC.visibility = View.VISIBLE
                     btnLimparDisplay.visibility = View.VISIBLE
                     btnBmpDisplay.visibility = View.VISIBLE
                     btnEscreverDisplay.visibility = View.VISIBLE
                     btnQrCodeDisplay.visibility = View.VISIBLE
-                    btnEscreverNFC.visibility = View.VISIBLE
-                    btnIniciarNFC.visibility = View.VISIBLE
-                    btnImprimirQrCode.visibility = View.VISIBLE
                     btnLerPesoBalanca.visibility = View.VISIBLE
                 }
                 "D2_MINI" -> {
@@ -206,10 +206,13 @@ class MainActivity(): AppCompatActivity()  {
                     btnImprimir.visibility = View.VISIBLE
                     btnImprimirImagem.visibility = View.VISIBLE
                     btnImprimirQrCode.visibility = View.VISIBLE
+                    btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                 }
                 "V2_PRO" -> {
                     goneButtons()
                     tectoy = TecToy(Dispositivo.V2_PRO, this@MainActivity)
+                    btnStatusImpressora.visibility = View.VISIBLE
                     btnImprimir.visibility = View.VISIBLE
                     btnImprimirImagem.visibility = View.VISIBLE
                     btnEscreverNFC.visibility = View.VISIBLE
@@ -217,6 +220,8 @@ class MainActivity(): AppCompatActivity()  {
                     btnImprimirQrCode.visibility = View.VISIBLE
                     btnPosicionarEtiqueta.visibility = View.VISIBLE
                     btnPosicionarFinalEtiqueta.visibility = View.VISIBLE
+                    btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                 }
                 "K2" -> {
                     tectoy = TecToy(Dispositivo.K2, this@MainActivity)
@@ -226,12 +231,12 @@ class MainActivity(): AppCompatActivity()  {
                     btnImprimirImagem.visibility = View.VISIBLE
                     btnAcionarGuilhotina.visibility = View.VISIBLE
                     btnIniciarNFC.visibility = View.VISIBLE
-                    btnImprimirQrCode.visibility = View.VISIBLE
                     btnLerPesoBalanca.visibility = View.VISIBLE
                     btnIniciarCameraProfundidade.visibility = View.VISIBLE
+                    btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                     btnDesligarLedIndicacao.visibility = View.VISIBLE
                     btnLigarLedIndicacao.visibility = View.VISIBLE
-                    btnIniciarScanner.visibility = View.VISIBLE
                 }
                 "K2_MINI" -> {
                     goneButtons()
@@ -242,10 +247,14 @@ class MainActivity(): AppCompatActivity()  {
                     btnImprimirImagem.visibility = View.VISIBLE
                     btnAbrirGaveta.visibility = View.VISIBLE
                     btnAcionarGuilhotina.visibility = View.VISIBLE
+                    btnEscreverNFC.visibility = View.VISIBLE
+                    btnIniciarNFC.visibility = View.VISIBLE
                     btnImprimirQrCode.visibility = View.VISIBLE
                     btnLerPesoBalanca.visibility = View.VISIBLE
                     btnDesligarLedIndicacao.visibility = View.VISIBLE
                     btnLigarLedIndicacao.visibility = View.VISIBLE
+                    btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                 }
                 "T2S" -> {
                     goneButtons()
@@ -264,6 +273,7 @@ class MainActivity(): AppCompatActivity()  {
                     tectoy = TecToy(Dispositivo.L2Ks, this@MainActivity)
                     btnIniciarNFC.visibility = View.VISIBLE
                     btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                     btnEscreverNFC.visibility = View.VISIBLE
                 }
                 "L2s" -> {
@@ -271,6 +281,7 @@ class MainActivity(): AppCompatActivity()  {
                     tectoy = TecToy(Dispositivo.L2s, this@MainActivity)
                     btnIniciarNFC.visibility = View.VISIBLE
                     btnIniciarScanner.visibility = View.VISIBLE
+                    btnEncerrarScanner.visibility = View.VISIBLE
                     btnEscreverNFC.visibility = View.VISIBLE
                 }
             }
@@ -428,7 +439,8 @@ class MainActivity(): AppCompatActivity()  {
         btnIniciarNFC.setOnClickListener { _: View? ->
 
             val dispositivo = spinnerDispositivos.selectedItem.toString()
-
+            txtAuxiliar.setText("");
+            retornoNFC = "";
             if (dispositivo == "K2") {
                 try {
                     tectoy.iniciarNFC(intent, nfcCallbackK2)
@@ -445,6 +457,7 @@ class MainActivity(): AppCompatActivity()  {
                 try {
                     tectoy.iniciarNFC(intent, nfcCallback)
                     NFCIniciado = true
+                    tectoy.onResumeNFC(this, pendingIntent);
                     Toast.makeText(
                         applicationContext,
                         "Comando enviado com sucesso",
